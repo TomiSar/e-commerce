@@ -10,7 +10,7 @@ const MainCarousel = () => {
 
   const items = mainCarouselData.map((item) => (
     <img
-      className='cursor-pointer'
+      className='cursor-pointer -z-10'
       key={item}
       src={item.image}
       alt=''

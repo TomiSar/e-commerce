@@ -1,8 +1,8 @@
 import MainCarousel from '../../components/HomeCarousel/MainCarousel';
 import HomeSectionCarousel from '../../components/HomeSectionCarousel/HomeSectionCarousel';
 import { mens_kurta } from '../../../Data/mens_kurta';
-import { womens_saree } from '../../../Data/womens_saree';
 import { womens_dress } from '../../../Data/womens_dress';
+import { womens_saree } from '../../../Data/womens_saree';
 
 const HomePage = () => {
   return (
