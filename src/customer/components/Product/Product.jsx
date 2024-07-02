@@ -27,6 +27,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { AddCircleOutline, RemoveCircleOutline } from '@mui/icons-material';
+import { useLocation, useNavigate } from 'react-router-dom';
 // import FormLabel from '@mui/material/FormLabel';
 
 const sortOptions = [
@@ -40,6 +41,38 @@ function classNames(...classes) {
 
 export default function Product() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleFilter = (value, sectionId) => {
+    const searchParams = new URLSearchParams(location.search);
+    let filterValue = searchParams.getAll(sectionId);
+
+    if (filterValue.length > 0 && filterValue[0].split(',').includes(value)) {
+      filterValue = filterValue[0].split(',').filter((item) => item !== value);
+
+      if (filterValue.length === 0) {
+        searchParams.delete(sectionId);
+      }
+    } else {
+      filterValue.push(value);
+    }
+
+    if (filterValue.length > 0) {
+      searchParams.set(sectionId, filterValue.join(','));
+    }
+
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
+  };
+
+  const handleRadioFilterChange = (e, sectionId) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set(sectionId, e.target.value);
+
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
+  };
 
   return (
     <div className='bg-white'>
@@ -246,16 +279,19 @@ export default function Product() {
                                   className='flex items-center'
                                 >
                                   <input
+                                    className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
                                     id={`filter-mobile-${section.id}-${optionIdx}`}
                                     name={`${section.id}[]`}
                                     defaultValue={option.value}
                                     type='checkbox'
                                     defaultChecked={option.checked}
-                                    className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                    onChange={() =>
+                                      handleFilter(option.value, section.id)
+                                    }
                                   />
                                   <label
-                                    htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
                                     className='ml-3 min-w-0 flex-1 text-gray-500'
+                                    htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
                                   >
                                     {option.label}
                                   </label>
@@ -310,9 +346,14 @@ export default function Product() {
                                   {section.options.map((option, optionIdx) => (
                                     <>
                                       <FormControlLabel
-                                        value={option.id}
                                         control={<Radio />}
+                                        defaultChecked={option.checked}
+                                        defaultValue={option.value}
                                         label={option.label}
+                                        value={option.value}
+                                        onChange={(e) =>
+                                          handleRadioFilterChange(e, section.id)
+                                        }
                                       />
                                     </>
                                   ))}
@@ -329,8 +370,8 @@ export default function Product() {
               {/* Product grid */}
               <div className='lg:col-span-4 w-full'>
                 <div className='flex flex-wrap justify-center bg-white py-5'>
-                  {mens_kurta.map((item) => (
-                    <ProductCard product={item} />
+                  {mens_kurta.map((item, index) => (
+                    <ProductCard key={index} product={item} />
                   ))}
                 </div>
               </div>
