@@ -9,7 +9,9 @@ function App() {
     <div>
       <Navigation />
       <div>
-        <h1 className='text-3xl font-bold text-sky-700'>E-Commerce</h1>
+        <h1 className='text-3xl font-bold text-sky-900 p-20'>
+          E-Commerce Application
+        </h1>
         <br />
         {/* <HomePage /> */}
         <Product />

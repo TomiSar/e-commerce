@@ -34,7 +34,7 @@ export const filters = [
   },
 ];
 
-export const signleFilter = [
+export const singleFilter = [
   {
     id: 'price',
     name: 'Price',
