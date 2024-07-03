@@ -1,4 +1,6 @@
 import './App.css';
+import Cart from './customer/components/Cart/Cart';
+import Checkout from './customer/components/Checkout/Checkout';
 import Footer from './customer/components/Footer/Footer';
 import Navigation from './customer/components/Navigation/Navigation';
 import Product from './customer/components/Product/Product';
@@ -13,10 +15,12 @@ function App() {
         <h1 className='text-3xl font-bold text-sky-900 p-20'>
           E-Commerce Application
         </h1>
-        <br />
+        {/* <br /> */}
         {/* <HomePage /> */}
         {/* <Product /> */}
-        <ProductDetails />
+        {/* <ProductDetails /> */}
+        {/* <Cart /> */}
+        <Checkout />
       </div>
       <Footer />
     </div>

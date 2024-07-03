@@ -21,6 +21,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { navigation } from './navigationData';
+import { Avatar } from '@mui/material';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -409,12 +410,14 @@ export default function Navigation() {
                     href='#'
                     className='flex items-center text-gray-700 hover:text-gray-800'
                   >
-                    <img
+                    {/* <img
                       src='https://tailwindui.com/img/flags/flag-canada.svg'
                       alt=''
                       className='block h-auto w-5 flex-shrink-0'
-                    />
-                    <span className='ml-3 block text-sm font-medium'>CAD</span>
+                    /> */}
+                    <span className='ml-3 block text-sm font-medium'>
+                      <Avatar sx={{ bgcolor: 'indigo' }}>C</Avatar>
+                    </span>
                     <span className='sr-only'>, change currency</span>
                   </a>
                 </div>
