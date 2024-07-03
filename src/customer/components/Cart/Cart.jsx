@@ -9,7 +9,6 @@ const Cart = () => {
           {[1, 1, 1, 1].map((item) => (
             <CartItem />
           ))}
-          {/* <CartItem /> */}
         </div>
         <div className='px-5 sticky top-0 h-[100vh] mt-5 lg:mt-0'>
           <div className='border'>

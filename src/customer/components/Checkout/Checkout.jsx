@@ -9,11 +9,10 @@ import {
   Typography,
 } from '@mui/material';
 import NavigateBeforeOutlinedIcon from '@mui/icons-material/NavigateBeforeOutlined';
-import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined';
 import DeliveryAddressForm from './DeliveryAddressForm';
 import OrderSummary from './OrderSummary';
 
-const steps = ['Login', 'Add Delivery Address', 'Order Summary', 'Payment'];
+const steps = ['Login', 'Delivery Address', 'Order Summary', 'Payment'];
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = useState(0);
@@ -61,13 +60,11 @@ export default function Checkout() {
                 <NavigateBeforeOutlinedIcon />
                 Back
               </Button>
-              <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                <NavigateNextOutlinedIcon />
-              </Button>
             </Box>
-            <div>{step === 2 ? <DeliveryAddressForm /> : <OrderSummary />}</div>
+
+            <div className='mt-10'>
+              {step === 2 ? <DeliveryAddressForm /> : <OrderSummary />}
+            </div>
           </>
         )}
       </Box>
