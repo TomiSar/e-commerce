@@ -22,6 +22,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { navigation } from './navigationData';
 import { Avatar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -29,6 +30,7 @@ function classNames(...classes) {
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const [openAuthModel, setOpenAuthModel] = useState(false);
   const [anchorElem, setAnchorElem] = useState(null);
   const opanUserMenu = Boolean(anchorElem);
@@ -50,9 +52,10 @@ export default function Navigation() {
     setOpenAuthModel(false);
   };
 
-  // const handleCategoryClick = (category, section, item, close) => {
-  //   close();
-  // };
+  const handleCategoryClick = (category, section, item, close) => {
+    navigate(`/${category.id}/${section.id}/${item.id}`);
+    close();
+  };
 
   // const handleMyOrderClick = () => {
   //   handleCloseUserMenu();
@@ -280,6 +283,7 @@ export default function Navigation() {
                                   : 'border-transparent text-gray-700 hover:text-gray-800',
                                 'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out'
                               )}
+                              onClick={() => handleOpen}
                             >
                               {category.name}
                             </PopoverButton>
@@ -354,12 +358,20 @@ export default function Navigation() {
                                                 key={item.name}
                                                 className='flex'
                                               >
-                                                <a
-                                                  href={item.href}
-                                                  className='hover:text-gray-800'
+                                                <p
+                                                  className='hover:text-gray-800 cursor-pointer'
+                                                  onClick={() =>
+                                                    handleCategoryClick(
+                                                      category,
+                                                      section,
+                                                      item,
+                                                      // eslint-disable-next-line no-restricted-globals
+                                                      close
+                                                    )
+                                                  }
                                                 >
                                                   {item.name}
-                                                </a>
+                                                </p>
                                               </li>
                                             ))}
                                           </ul>

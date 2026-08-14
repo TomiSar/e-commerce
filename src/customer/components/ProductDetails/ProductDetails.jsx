@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { StarIcon } from '@heroicons/react/20/solid';
 import { Radio, RadioGroup } from '@headlessui/react';
 import { Box, Button, Grid, LinearProgress, Rating } from '@mui/material';
 import ProductReviewCard from './ProductReviewCard';
 import { mens_kurta } from '../../../Data/mens_kurta';
 import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
+import { useNavigate } from 'react-router-dom';
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -63,6 +63,11 @@ function classNames(...classes) {
 export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    navigate('/cart');
+  };
 
   return (
     <div className='bg-white lg:px-20'>
@@ -234,6 +239,7 @@ export default function ProductDetails() {
                 <Button
                   variant='contained'
                   sx={{ px: '2rem', mt: '1rem', bgcolor: '#9155fd' }}
+                  onClick={handleAddToCart}
                 >
                   Add To Cart
                 </Button>
